@@ -93,7 +93,7 @@ export class DifferenceGraphPanel extends Component<graph_panel_props, graph_pan
             need_update: true,
             graph_update: false,
             is_part_changed: new Map<string, number>(),
-            filter: 0,
+            filter: this.props.graph.filter(),
         };
         this._graphDiv = createRef();
         this.times = [];
@@ -850,12 +850,12 @@ export class DifferenceGraphPanel extends Component<graph_panel_props, graph_pan
           this.props.graph.resetColor(); // reset all colors
           this.fillGraphData();
         }
-        const {filter_prop} = this.props;
-
-        const filterChnage = filter_prop !== prevProps.filter_prop;
-        if(filterChnage)
-            this.onChangeFilter(filter_prop);
-        
+        if(this.props.graph.filter() !== this.state.filter) {
+            this.setState({
+                filter: this.props.graph.filter(),
+            });
+            this.onChangeFilter(this.props.graph.filter());
+        } 
     }
 
     onChangeFilter(e:number){

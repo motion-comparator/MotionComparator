@@ -20,6 +20,7 @@ import { UmapGraph } from "./objects3D/UmapGraph";
 import { BoxBase, LayoutBase, PanelBase, TabBase } from "rc-dock";
 import { Graph } from "./objects3D/Graph";
 import { Id } from "./Id";
+import { PopupHelpPage } from "./react_components/popup_help_page";
 
 export interface serialized_robot_scene_manager {
 }
@@ -1042,14 +1043,19 @@ export class RobotSceneManager {
      * @param url The url to fetch the sessions from.
      */
     async loadSessionFromURL(url:string, onRestoreLayout?: (savedLayout: LayoutBase | undefined) => void):Promise<void> {
-        let res = await fetch(url, {
-            method: "GET",
-//            headers: {
-//                "Access-Control-Allow-Origin": "*"
-//            }
-        });
+        APP.setPopupHelpPage({ page: PopupHelpPage.LoadingStarted, location: url });
 
-        await this.loadSession(await res.json(), onRestoreLayout)
+        try {
+            // fetch the data
+            let res = await fetch(url, { method: "GET", });
+            // load the data
+            await this.loadSession(await res.json(), onRestoreLayout)
+            APP.setPopupHelpPage({ page: PopupHelpPage.LoadingSuccess, location: url })
+        } catch(e) {
+            // failed to load
+            APP.setPopupHelpPage({ page: PopupHelpPage.LoadingFailed, location: url });
+            throw e;
+        }
     }
 
     /**
@@ -1338,7 +1344,8 @@ export class RobotSceneManager {
                 line_ids: string[],
                 lineWidth: number, 
                 backgroundColor: string, 
-                axisColor: string, 
+                axisColor: string,
+                filter: number, 
             }[];
             // use myGraphs instead of sessions_import_format["graph"] as
             // sessions_import_format["graph"] can be undefined
@@ -1357,6 +1364,7 @@ export class RobotSceneManager {
                 lineWidth: graph.lineWidth(),
                 axisColor: graph.axisColor(),
                 backgroundColor: graph.backgroundColor(),
+                filter: graph.filter(),
             });
         }
 
@@ -1412,21 +1420,45 @@ export class RobotSceneManager {
      * @returns A promise that resolves when the json was successfully loaded.
      */
     async loadSessionFromLocalFile(file:File, onRestoreLayout?: (savedLayout: LayoutBase | undefined) => void):Promise<void> {
-        let json = (await loadJsonFromLocalFile(file)) as sessions_import_format;
-        this.loadSession(json, onRestoreLayout);
+        APP.setPopupHelpPage({ page: PopupHelpPage.LoadingStarted, location: file.name });
+        try {
+            // fetch the json data
+            let json = (await loadJsonFromLocalFile(file)) as sessions_import_format;
+            // load the json data
+            this.loadSession(json, onRestoreLayout);
+            APP.setPopupHelpPage({ page: PopupHelpPage.LoadingSuccess, location: file.name })
+        } catch(e) {
+            APP.setPopupHelpPage({ page: PopupHelpPage.LoadingFailed, location: file.name })
+            throw e;
+        }
     }
 
     /**
      * Loads in the sessions from the given session format.
      * @param sessions The sessions to load in.
      */
-    async loadSession(sessions:sessions_import_format, onRestoreLayout?: (savedLayout: LayoutBase | undefined) => void):Promise<void> {
+    protected async loadSession(sessions:sessions_import_format, onRestoreLayout?: (savedLayout: LayoutBase | undefined) => void):Promise<void> {
         let version = sessions.saveFormatVersion;
 
         if (version === undefined || version === "1.0") {
+            // const loadingMessage = `Loading`;
+            // const loadingElement = document.createElement("p");
+            // loadingElement.innerText = loadingMessage;
+            // loadingElement.style.color = "yellow";
+            // loadingElement.classList.add("LoadingMessage");
+            // const panelElement = document.querySelector(".Workspace");
+            // panelElement?.insertBefore(loadingElement, panelElement?.firstChild);
+
             await this.loadV1Session(sessions, onRestoreLayout);
+
+            // const messageElements = document.querySelectorAll('.LoadingMessage');
+            // messageElements.forEach(element => {
+            //     if (element.parentNode) {
+            //         element.parentNode.removeChild(element);
+            //     }
+            // });
         } else {
-            APP.error(`Could not load in session with unknown version number "${version}"`);
+            APP.error(`Could not load in workspace with unknown version number "${version}"`);
             return;
         }
 
@@ -1821,6 +1853,7 @@ export class RobotSceneManager {
                 newGraph.setAxisColor(graph.axisColor);
                 newGraph.setBackgroundColor(graph.backgroundColor);
                 newGraph.setLineWidth(graph.lineWidth);
+                if(graph.filter !== undefined) newGraph.setFilter(graph.filter);
             }
         }
 

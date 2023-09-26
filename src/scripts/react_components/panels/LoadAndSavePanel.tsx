@@ -408,7 +408,7 @@ export class LoadAndSavePanel extends Component<load_and_save_panel_props, load_
                 </div> */}
                 <div className="Workspace">
                     <div className="LS-label"><label> <b> Workspace </b>  </label></div>
-                    <div className="LS-container1">
+                    <div className="LS-container1" id="UploadSession">
                         <FileUploader
                             label="Upload: "
                             accept={[".json"]}

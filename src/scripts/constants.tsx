@@ -5,7 +5,7 @@
 import { AssertionError } from "assert";
 import { AnimationTable } from "./AnimationTable";
 import App from "./react_components/App";
-import { PopupHelpPage } from "./react_components/popup_help_page";
+import { PopupHelpPage, PopupHelpPageParams } from "./react_components/popup_help_page";
 
 let _debug: boolean = true;
 export function DEBUG(): boolean { return _debug; }
@@ -50,19 +50,19 @@ class AppProxy {
     /**
      * @returns The current help popup page.
      */
-    popupHelpPage(): PopupHelpPage {
+    popupHelpPage(): PopupHelpPageParams {
         if (this._app) {
             return this._app.popupHelpPage();
         } else {
-            return PopupHelpPage.None;
+            return { page: PopupHelpPage.None };
         }
     }
 
     /**
      * Sets the current popup help page.
-     * @param page The popup help page for the application to have.
+     * @param page The page to have popup.
      */
-    setPopupHelpPage(page: PopupHelpPage) {
+    setPopupHelpPage(page: PopupHelpPage | PopupHelpPageParams) {
         if (this._app) {
             this._app.setPopupHelpPage(page);
         }

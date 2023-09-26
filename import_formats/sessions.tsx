@@ -190,6 +190,7 @@ export interface sessions_import_format {
         lineWidth: number, // the stoke size of the curves displayed in the graph
         backgroundColor: string, // the background color of the graph
         axisColor: string, // the axis color of the graph
+        filter?: number,
     }[],
 
     umapGraphs?:{

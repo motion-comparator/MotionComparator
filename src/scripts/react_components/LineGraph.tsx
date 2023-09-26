@@ -626,7 +626,8 @@ export class LineGraph extends Component<line_graph_props, line_graph_state> {
                     .x((d:data_entry):number => { return x_axis(d.times); })
                     .y((d:data_entry):number => { return y_axis(d.vals); });
         if(isTimeWarp){
-            let path1 = svg.append("path").remove()
+            if (data.length === 2) {
+                let path1 = svg.append("path").remove()
                     .append("path")
                     .data([data[1]])
                     .attr("class", "line")
@@ -635,9 +636,9 @@ export class LineGraph extends Component<line_graph_props, line_graph_state> {
                     .attr("stroke-width", lineWidth)
                     .attr("d", valueLine)
                     .node()
-            
-            svg.node().appendChild(path1);
-            let path2 = svg.append("path").remove()
+
+                svg.node().appendChild(path1);
+                let path2 = svg.append("path").remove()
                     .append("path")
                     .data([data[0]])
                     .attr("class", "line")
@@ -647,7 +648,8 @@ export class LineGraph extends Component<line_graph_props, line_graph_state> {
                     .attr("d", valueLine)
                     .node()
 
-            svg.node().appendChild(path2);
+                svg.node().appendChild(path2);
+            } 
         }else{
             for(let i = 0; i < data.length; i++){
 

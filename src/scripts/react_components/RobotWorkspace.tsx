@@ -454,10 +454,12 @@ export class RobotWorkspace extends Component<robot_workspace_props, robot_works
         return (
             <div className={"HomeTab"}>
                 <div style={{ textAlign: "center" }}>
-                    <h1>Welcome to the Motion Comparator</h1>
+                    <h1>👋 Welcome to Motion Comparator</h1>
 
                     <br></br>
-                    <p> Motion Comparator helps roboticists visualize, understand, compare, and communiate robot motions. </p>
+                    <p> Motion Comparator helps roboticists </p> 
+                    <p> visualize 👀, understand 💡, compare 🔍, and communiate 💬 </p> 
+                    <p> robot motions. </p>
                     <br></br>
 
                     <div className="PopUpGroup" style={{justifyContent: "center", alignItems: "center"}}>
@@ -472,14 +474,14 @@ export class RobotWorkspace extends Component<robot_workspace_props, robot_works
 
                     <div className={"ExampleImageGroup"}>
                         <img src="https://raw.githubusercontent.com/motion-comparator/examples/main/workspaces/panda_pick_and_place/panda_pick_and_place.png" className={"ExampleImage"} alt="Panda Pick and Place"/>
-                        <div className={"ExampleImageOverlay"} onClick={() => this.onClickImage("https://raw.githubusercontent.com/motion-comparator/examples/main/workspaces/spot_arm_sweep/spot_arm_sweep.json")}>
+                        <div className={"ExampleImageOverlay"} onClick={() => this.onClickImage("https://raw.githubusercontent.com/motion-comparator/examples/main/workspaces/panda_pick_and_place/panda_pick_and_place.json")}>
                             <div className={"ExampleImageOverlayText"}>Pick and Place Motions of Panda Robot </div>
                         </div>
                     </div>
 
                     <div className={"ExampleImageGroup"}>
                         <img src="https://raw.githubusercontent.com/motion-comparator/examples/main/workspaces/mico_legible/mico_legible.png" className={"ExampleImage"} alt="Mico Legible" />
-                        <div className={"ExampleImageOverlay"} onClick={() => this.onClickImage("https://raw.githubusercontent.com/motion-comparator/examples/main/workspaces/spot_arm_sweep/spot_arm_sweep.json")}>
+                        <div className={"ExampleImageOverlay"} onClick={() => this.onClickImage("https://raw.githubusercontent.com/motion-comparator/examples/main/workspaces/mico_legible/mico_legible.json")}>
                             <div className={"ExampleImageOverlayText"}>Legible Motions of Mico Robot </div>
                         </div>
                     </div>
@@ -493,7 +495,7 @@ export class RobotWorkspace extends Component<robot_workspace_props, robot_works
 
                     <div className={"ExampleImageGroup"}>
                         <img src="https://raw.githubusercontent.com/motion-comparator/examples/main/workspaces/sawyer_teleop/sawyer_teleop.png" className={"ExampleImage"} alt="Pick and Place" />
-                        <div className={"ExampleImageOverlay"} onClick={() => this.onClickImage("https://raw.githubusercontent.com/motion-comparator/examples/main/workspaces/spot_arm_sweep/spot_arm_sweep.json")}>
+                        <div className={"ExampleImageOverlay"} onClick={() => this.onClickImage("https://raw.githubusercontent.com/motion-comparator/examples/main/workspaces/sawyer_teleop/sawyer_teleop.json")}>
                             <div className={"ExampleImageOverlayText"}>Teleoperation of Sawyer Robot </div>
                         </div>
                     </div>

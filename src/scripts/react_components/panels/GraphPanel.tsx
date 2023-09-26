@@ -122,7 +122,7 @@ export class GraphPanel extends Component<graph_panel_props, graph_panel_state> 
             is_part_changed: new Map<string, number>(),
             need_update: true,
             graph_update: false,
-            filter: 0,
+            filter: this.props.graph.filter(),
             velocity_map: new Map<string, number[][]>(),
             acceleration_map: new Map<string, number[][]>(),
         };
@@ -1222,10 +1222,12 @@ export class GraphPanel extends Component<graph_panel_props, graph_panel_state> 
             this.onChangeGraphWithManyLines(eventName, add);
 
         // react to the updates in OptiontionPanel
-        const {filter_prop} = this.props;
-        const filterChnage = filter_prop !== prevProps.filter_prop;
-        if(filterChnage)
-            this.onChangeFilter(filter_prop);
+        if(this.props.graph.filter() !== this.state.filter) {
+            this.setState({
+                filter: this.props.graph.filter(),
+            });
+            this.onChangeFilter(this.props.graph.filter());
+        } 
     }
 
     /**

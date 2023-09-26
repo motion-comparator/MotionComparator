@@ -458,21 +458,24 @@ export class SceneLegendPanel extends Component<legend_props, legend_state> {
         }
 
         // append the header "Difference between Traces:"
-        svg
-            .append("foreignObject")
-            .attr("x", legend_start_x + 15)
-            .attr("y", legend_y)
-            .attr("width", 200) // Set the maximum width for text wrapping
-            .attr("height", 30)
-            .append("xhtml:div")
-            .style("font-weight", 600)
-            .style("font-size", "13px")
-            .style("max-width", "100%")
-            .style("color", "white") // Set the text color
-            .html(
-                `<p style="word-wrap: break-word; margin: 0;">Difference between Traces:</p>`
-            );
-        legend_y += 30;
+        if (arrows.length > 0) {
+            svg
+                .append("foreignObject")
+                .attr("x", legend_start_x + 15)
+                .attr("y", legend_y)
+                .attr("width", 200) // Set the maximum width for text wrapping
+                .attr("height", 30)
+                .append("xhtml:div")
+                .style("font-weight", 600)
+                .style("font-size", "13px")
+                .style("max-width", "100%")
+                .style("color", "white") // Set the text color
+                .html(
+                    `<p style="word-wrap: break-word; margin: 0;">Difference between Traces:</p>`
+                );
+            legend_y += 30;
+        }
+
         for (let i = 0; i < arrows_names.length; i++) {
 
             svg

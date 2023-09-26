@@ -29,6 +29,7 @@ export class Graph {
     protected _lineWidth: number; // the stoke size of the curves displayed in the graph
     protected _backgroundColor: string; // the background color of the graph
     protected _axisColor: string; // the axis color of the graph
+    protected _filter: number; // the convolution filtering level
 
     /**
      * 
@@ -51,6 +52,7 @@ export class Graph {
         this._lineWidth = 1;
         this._backgroundColor = "#171819"; //rgb(23, 24, 25)
         this._axisColor = "#B7B7BD"; // rgb(183, 183, 189)
+        this._filter = 0;
 
         if(lineWidth !== undefined)
             this._lineWidth = lineWidth;
@@ -78,6 +80,14 @@ export class Graph {
 
         this._colorPalettes = [...palettes];
         Graph.counter++;
+    }
+
+    filter(): number{
+        return this._filter;
+    }
+
+    setFilter(filter: number) {
+        this._filter = filter;
     }
 
     backgroundColor(): string{

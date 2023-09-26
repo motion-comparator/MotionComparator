@@ -303,7 +303,9 @@ export class GraphOptionPanel extends Component<graph_panel_props, graph_panel_s
      */
     onChangeFilter(e:number){
         console.log("on change filter");
-        this.props.updateGraphPropertyPanelState(undefined, undefined, e);
+        // this.props.updateGraphPropertyPanelState(undefined, undefined, e);
+        this.props.forceUpdateTabNames(); // trigger the graph update instantaneously
+        this.props.robotSceneManager.getCurrGraph()?.setFilter(e);
     }
     /**
      * Handle change line width
@@ -407,7 +409,7 @@ export class GraphOptionPanel extends Component<graph_panel_props, graph_panel_s
                       min={0}
                       max={10}
                       step={1}
-                      value={filter_prop ?? 0}
+                      value={currSelectedGraph?.filter()}
                       onChange={this.onChangeFilter.bind(this)}
                     />
                     <LabeledSlider

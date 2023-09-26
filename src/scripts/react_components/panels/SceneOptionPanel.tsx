@@ -780,7 +780,6 @@ export class SceneOptionsPanel extends Component<scene_options_panel_props, scen
                         <label>World Frame:</label>
                         <label>ROS</label>
                         <Switch
-                          color="secondary"
                           checked={robotScene.worldFrame() === "THREE.js"}
                           onChange={this.toggleWorldFrame.bind(this)}
                         />
@@ -791,7 +790,6 @@ export class SceneOptionsPanel extends Component<scene_options_panel_props, scen
                         <label>Camera Type:</label>
                         <label>Perspective</label>
                         <Switch
-                          color="secondary"
                           checked={robotScene.cameraType() === "Orthographic"}
                           onChange={this.toggleCameraType.bind(this)}
                         />

@@ -17,6 +17,7 @@ html, body {
     --panel-background-color: rgb(23, 24, 25);
     --lighter-panel-background-color: rgba(44, 59, 59, 0.7);
     --panel-text-color: rgb(238, 238, 238);
+    --panel-link-text-color: #0066CC;
 
     background-color: black;
 
@@ -158,6 +159,22 @@ html, body {
             }
         
             input[type=button]:hover{
+                background: var(--panel-text-color);
+                color: var(--panel-background-color);
+            }
+
+            .ClickButton {
+                font-size: 15px;
+                font-family: 'Roboto' , sans-serif;
+                background-color: var(--panel-background-color);
+                padding: 0.25em 0.5em;
+                border-radius: 1em;
+                border: 2px solid var(--panel-text-color);
+                outline: none;
+                color: var(--panel-text-color);
+                cursor: pointer;
+            }
+            .ClickButton:hover{
                 background: var(--panel-text-color);
                 color: var(--panel-background-color);
             }
@@ -383,6 +400,7 @@ html, body {
                             background-color: var(--panel-background-color);
 
                             margin-top: 5px;
+                            margin-left: 1rem;
                             height: 40px;
                             display: flex;
                             align-items: center;
@@ -599,7 +617,7 @@ html, body {
                     }
                     
                     .accordion__button:hover {
-                        background-color: #0b069b;
+                        background-color: #007bff;
                     }
                     
                     .accordion__button:before {
@@ -713,22 +731,7 @@ html, body {
                     }
 
 
-                    .GraphPanel {
-                        .xLabel {
-                            font-size: 1.3rem;
-                        }
-
-                        .yLabel {
-                            font-size: 1.3rem;
-                        }
-
-                        .GraphAxis {
-                            font-size: 1.3rem;
-                        }
-                        .GraphGrid {
-                            opacity: 0.15;
-                        }
-                    }
+                    
 
                     .AnimationPanel {
                         margin: 0;
@@ -795,15 +798,15 @@ html, body {
                     .SceneOptionPanel{
                         display: block;
                         color: var(--panel-text-color);
-                        input[type=button], button, .fileInputHolder{
-                            background-color: var(--panel-background-color);
-                            border: 2px solid #d5dce0;
-                            color: #d5dce0;
-                            // padding-top: 0.25rem;
-                            // padding-bottom: 0.25rem;
-                            padding-left: 1rem;
-                            padding-right: 1rem;
-                        }
+                        // input[type=button], button, .fileInputHolder{
+                        //     background-color: var(--panel-background-color);
+                        //     border: 2px solid #d5dce0;
+                        //     color: #d5dce0;
+                        //     // padding-top: 0.25rem;
+                        //     // padding-bottom: 0.25rem;
+                        //     padding-left: 1rem;
+                        //     padding-right: 1rem;
+                        // }
                         > * {
                             margin-bottom: 0.5rem;
                         }
@@ -815,22 +818,6 @@ html, body {
                             * + * {
                                 margin-left: 0.5rem;
                             }
-                        }
-
-                        .ClickButton {
-                            font-size: 15px;
-                            font-family: 'Roboto' , sans-serif;
-                            background-color: var(--panel-background-color);
-                            padding: 0.25em 0.5em;
-                            // border-radius: 1em;
-                            border: 2px solid #d5dce0;
-                            outline: none;
-                            color: #d5dce0;
-                            cursor: pointer;
-                        }
-                        .ClickButton:hover{
-                            background: var(--panel-text-color);
-                            color: var(--panel-text-color);
                         }
 
                         .Select{
@@ -1105,6 +1092,21 @@ html, body {
                     }
                     .GraphPanel {  // this is actually class name of the Graph Panel
                         // margin: 1rem;
+                        .xLabel {
+                            font-size: 1.3rem;
+                        }
+
+                        .yLabel {
+                            font-size: 1.3rem;
+                        }
+
+                        .GraphAxis {
+                            font-size: 1.3rem;
+                        }
+                        .GraphGrid {
+                            opacity: 0.15;
+                        }
+
                         margin: 0;
                         width: 100%; 
                         height: 100%;
@@ -1133,7 +1135,6 @@ html, body {
                                 background: var(--panel-text-color);
                                 color: var(--panel-background-color);
                             }
-                         
                             // visibility: hidden;
                             display: flex;
                             gap: 10px;
@@ -1362,7 +1363,7 @@ html, body {
                 .OpenPop {
                     cursor: pointer;
                     // position: absolute;
-                    background-color: var(--background-color);
+                    background-color: var(--panel-background-color);
                     padding: 0.25em 0.5em;
                     border-radius: 1em;
                     border: 2px solid var(--panel-button-bg-color);
@@ -1376,7 +1377,7 @@ html, body {
                 }
                 .OpenPop:hover{
                     background: var(--panel-button-bg-color);
-                    color: var(--background-color);
+                    color: var(--panel-background-color);
                 }
                 // visibility: hidden;
                 display: flex;
@@ -1392,14 +1393,25 @@ html, body {
                 padding: 20px;
                 border: 1px solid #ccc;
                 color: white;
-                background-color: var(--background-color);
+                background-color: var(--panel-background-color);
                 z-index: 1000;
-                width: 600px; 
-                height: 600px; 
+                width: 40%; 
+                height: 80%; 
                 overflow: auto;
 
                 .content {
                     transform: translate(0, -2.5rem);
+
+                    input[type=button], button{
+                        font-size: 15px;
+                        font-family: 'Roboto' , sans-serif;
+                        background: transparent;
+                        border: none;
+                        outline: none;
+                        color: var(--panel-link-text-color);
+                        text-decoration: underline;
+                        cursor: pointer;
+                    }
                 }
 
                 .Xmark {
@@ -1417,6 +1429,23 @@ html, body {
                 }
             }
 
+            .HelpPopup.HelpPopup-LoadingStarted, .HelpPopup.HelpPopup-LoadingFailed{
+                border: none;
+                width: 40%; 
+                height: 10%; 
+                background: transparent;
+                .content{
+                    position: relative;
+                    top: 60%;
+                    .LoadingMessage{
+                        font-size: 20px;
+                        font-weight: bold;
+                        position: relative;
+                        text-align: center;
+                    }
+                }
+            }
+
             .overlay {
                 display: block;
                 position: fixed;
@@ -1424,7 +1453,7 @@ html, body {
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
+                background-color: rgba(0, 0, 0, 0.8);
                 z-index: 999;
             }
         }

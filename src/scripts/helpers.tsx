@@ -112,7 +112,7 @@ export function getEndPointFromQuaternion(quaternion: T.Quaternion, pre_vector: 
         let v2 = new T.Vector3(-quaternion.x, -quaternion.y, -quaternion.z);
         let d1 = v1.distanceTo(pre_vector);
         let d2 = v2.distanceTo(pre_vector);
-        if  (d1 < d2 || d1 == d2)
+        if  (d1 < d2 || d1 == d2 && positive)
             endpoint = origin.clone().add(v1);
         else 
             endpoint = origin.clone().add(v2);

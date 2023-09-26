@@ -6,7 +6,7 @@ import { RobotSceneManager } from '../RobotSceneManager';
 import { AnimationTable } from '../AnimationTable';
 import { RobotWorkspace } from './RobotWorkspace';
 import React from 'react';
-import { PopupHelpPage, popupHelpPageDiv } from './popup_help_page';
+import { PopupHelpPage, PopupHelpPageParams, popupHelpPageDiv } from './popup_help_page';
 
 interface app_props { }
 
@@ -24,7 +24,7 @@ interface app_state {
     prev_times: { startTime: number, endTime: number, },
 
     /** The current popup page to be shown. */
-    currPopupHelpPage: PopupHelpPage,
+    currPopupHelpPage: PopupHelpPageParams,
 }
 
 /**
@@ -76,7 +76,7 @@ export default class App extends Component<app_props, app_state> {
             robotSceneManager: sceneManager,
             jsonURL: jsonURL,
             uiUpdateCnt: 0,
-            currPopupHelpPage: PopupHelpPage.None,
+            currPopupHelpPage: { page: PopupHelpPage.None },
             prev_times : {
                 startTime: sceneManager.startTime(),
                 endTime: sceneManager.endTime(),
@@ -153,7 +153,7 @@ export default class App extends Component<app_props, app_state> {
     /**
      * @returns The current popup page shown.
      */
-    popupHelpPage(): PopupHelpPage {
+    popupHelpPage(): PopupHelpPageParams {
         return this.state.currPopupHelpPage;
     }
 
@@ -161,8 +161,9 @@ export default class App extends Component<app_props, app_state> {
      * Sets the current popup help page.
      * @param page The enum variant of the page you want to popup.
      */
-    setPopupHelpPage(page: PopupHelpPage) {
-        this.setState({ currPopupHelpPage: page })
+    setPopupHelpPage(page: PopupHelpPage | PopupHelpPageParams) {
+        let params = (typeof page === "string" ? { page } : page);
+        this.setState({ currPopupHelpPage: params })
     }
 
     /**
