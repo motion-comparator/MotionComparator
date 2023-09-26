@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/MotionComparator/static/css/main.47383ed3.css",
-    "main.js": "/MotionComparator/static/js/main.2c3466b4.js",
+    "main.css": "/MotionComparator/static/css/main.da6ffd7b.css",
+    "main.js": "/MotionComparator/static/js/main.5851a392.js",
     "static/js/787.9064070b.chunk.js": "/MotionComparator/static/js/787.9064070b.chunk.js",
     "index.html": "/MotionComparator/index.html",
-    "main.47383ed3.css.map": "/MotionComparator/static/css/main.47383ed3.css.map",
-    "main.2c3466b4.js.map": "/MotionComparator/static/js/main.2c3466b4.js.map",
+    "main.da6ffd7b.css.map": "/MotionComparator/static/css/main.da6ffd7b.css.map",
+    "main.5851a392.js.map": "/MotionComparator/static/js/main.5851a392.js.map",
     "787.9064070b.chunk.js.map": "/MotionComparator/static/js/787.9064070b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.47383ed3.css",
-    "static/js/main.2c3466b4.js"
+    "static/css/main.da6ffd7b.css",
+    "static/js/main.5851a392.js"
   ]
 }
