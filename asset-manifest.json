@@ -1,9 +1,11 @@
 {
   "files": {
     "main.css": "/MotionComparator/static/css/main.0b68d512.css",
-    "main.js": "/MotionComparator/static/js/main.a5603ac4.js",
+    "main.js": "/MotionComparator/static/js/main.c743941a.js",
     "static/js/787.9064070b.chunk.js": "/MotionComparator/static/js/787.9064070b.chunk.js",
+    "static/media/RobotOptionsRobotEditing.gif": "/MotionComparator/static/media/RobotOptionsRobotEditing.0ceb0430a7d2f5a36226.gif",
     "static/media/DoubleTimeBarBeingScrubbed.gif": "/MotionComparator/static/media/DoubleTimeBarBeingScrubbed.e6d31ef1ee78c99bea26.gif",
+    "static/media/SceneOptionsEditingScene.gif": "/MotionComparator/static/media/SceneOptionsEditingScene.0e601e386bb857a635ee.gif",
     "static/media/QScene_ChangeSettings.gif": "/MotionComparator/static/media/QScene_ChangeSettings.e2d8fa9bb9db55166237.gif",
     "static/media/TimeBarBeingScrubbed.gif": "/MotionComparator/static/media/TimeBarBeingScrubbed.c706169dcd2d43fa0a5f.gif",
     "static/media/DoubleTimeBarPlaying.gif": "/MotionComparator/static/media/DoubleTimeBarPlaying.02a49b4c629ac5e537ff.gif",
@@ -17,9 +19,11 @@
     "static/media/CreationAndPopulationOfDiffGraph.gif": "/MotionComparator/static/media/CreationAndPopulationOfDiffGraph.595d02b79193c75c792e.gif",
     "static/media/DragAndDropLegendOfGraph.gif": "/MotionComparator/static/media/DragAndDropLegendOfGraph.457da9ec607a609677c1.gif",
     "static/media/DragAndDropDifferenceGraphLegend.gif": "/MotionComparator/static/media/DragAndDropDifferenceGraphLegend.831975853e47a8aa80e7.gif",
+    "static/media/LS_Workspace.gif": "/MotionComparator/static/media/LS_Workspace.49a2192e262d08c42570.gif",
     "static/media/AddJointValueToGraph.gif": "/MotionComparator/static/media/AddJointValueToGraph.fa704a3fe51d341436cb.gif",
     "static/media/CreationOfNewEmptyScene.gif": "/MotionComparator/static/media/CreationOfNewEmptyScene.0d9480ee206ececb148e.gif",
     "static/media/UmapOption_ChangeParams.gif": "/MotionComparator/static/media/UmapOption_ChangeParams.5e806f1138e690eca8a6.gif",
+    "static/media/SceneLegendAndDeletionOfTraces.gif": "/MotionComparator/static/media/SceneLegendAndDeletionOfTraces.3f18f9b27d45e06613ac.gif",
     "static/media/CloningScene.gif": "/MotionComparator/static/media/CloningScene.f0655459e60aff0e580e.gif",
     "static/media/UmapOption_ChangeLineWidth.gif": "/MotionComparator/static/media/UmapOption_ChangeLineWidth.05dac81489ad072ce73b.gif",
     "static/media/UmapOption_CreateUmap.gif": "/MotionComparator/static/media/UmapOption_CreateUmap.e34934d677d90231d141.gif",
@@ -31,18 +35,16 @@
     "static/media/AddTraceToScene.gif": "/MotionComparator/static/media/AddTraceToScene.98c7aa8dcfed659912a8.gif",
     "static/media/AddGhostToScene.gif": "/MotionComparator/static/media/AddGhostToScene.d202aba35607bd45bdd7.gif",
     "static/media/Umap_OpenLegend.gif": "/MotionComparator/static/media/Umap_OpenLegend.24e8b40034a4926c9bdc.gif",
-    "static/media/SceneOptionsPanelScreenshot.png": "/MotionComparator/static/media/SceneOptionsPanelScreenshot.885448572710968cfe1a.png",
-    "static/media/RobotOptionsPanelScreenshot.png": "/MotionComparator/static/media/RobotOptionsPanelScreenshot.d257c34881addb3131ae.png",
-    "static/media/LoadAndSavePanelScreenshot.png": "/MotionComparator/static/media/LoadAndSavePanelScreenshot.fe0e6d3c77a8910c57e3.png",
+    "static/media/LooadingInExampleRobot.gif": "/MotionComparator/static/media/LooadingInExampleRobot.50db16bbfcd366a2c41f.gif",
     "static/media/PictureOfDifferenceGraphWithDifferences.png": "/MotionComparator/static/media/PictureOfDifferenceGraphWithDifferences.13ec0c0188fabf869f6f.png",
     "static/media/PictureOfDifferenceGraphWithNoDifferences.png": "/MotionComparator/static/media/PictureOfDifferenceGraphWithNoDifferences.903c74d4b80187ca3b5c.png",
     "index.html": "/MotionComparator/index.html",
     "main.0b68d512.css.map": "/MotionComparator/static/css/main.0b68d512.css.map",
-    "main.a5603ac4.js.map": "/MotionComparator/static/js/main.a5603ac4.js.map",
+    "main.c743941a.js.map": "/MotionComparator/static/js/main.c743941a.js.map",
     "787.9064070b.chunk.js.map": "/MotionComparator/static/js/787.9064070b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0b68d512.css",
-    "static/js/main.a5603ac4.js"
+    "static/js/main.c743941a.js"
   ]
 }
