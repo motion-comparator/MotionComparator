@@ -46,7 +46,15 @@ import ColoredTimeBarInUse from "../../assets/ColoredTimeBarInUse.gif"
 import DoubleTimeBarPlaying from "../../assets/DoubleTimeBarPlaying.gif"
 import DoubleTimeBarBeingScrubbed from "../../assets/DoubleTimeBarBeingScrubbed.gif"
 
+import LooadingInExampleRobot from "../../assets/LooadingInExampleRobot.gif"
+import SceneLegendAndDeletionOfTraces from "../../assets/SceneLegendAndDeletionOfTraces.gif"
+import SceneOptionsEditingScene from "../../assets/SceneOptionsEditingScene.gif"
+
+import RobotOptionsRobotEditing from "../../assets/RobotOptionsRobotEditing.gif"
+
+
 import LoadAndSavePanelScreenshot from "../../assets/LoadAndSavePanelScreenshot.png"
+import LS_Workspace from "../../assets/LS_Workspace.gif"
 
 
 /**
@@ -77,6 +85,7 @@ export enum PopupHelpPage {
     TimeWarping = "Time Warping", // page that describes what "time warping" is.
     Umap = "UMAP", // help page that describes what a "UMAP" is
     Qscene = "Quaternion Space Scene",
+    AnimationCSV = "Animation CSV",
 
     // page to show when a page is not found
     PageNotFound = "Page Not Found",
@@ -212,6 +221,7 @@ function popupHelpPageContent(params:PopupHelpPageParams): ReactElement | null {
                 <ul>
                     <li>The {goTo(PopupHelpPage.Umap)} page describes what a "UMAP" is. </li>
                     <li>The {goTo(PopupHelpPage.TimeWarping)} page describes what "time warping" is. </li>
+                    <li>The {goTo(PopupHelpPage.AnimationCSV)} page describes the animation CSV format. </li>
                 </ul>
             </div>
         </div>;
@@ -458,7 +468,6 @@ function popupHelpPageContent(params:PopupHelpPageParams): ReactElement | null {
                 </p>
                 <img src={Umap_AddLine}/>
 
-
                 <h3> Open a legend </h3>
                 <p>Click and drag the legend button to create a legend panel for this UMAP Graph Panel</p>
                 <img src={Umap_OpenLegend}/>
@@ -469,7 +478,7 @@ function popupHelpPageContent(params:PopupHelpPageParams): ReactElement | null {
             <h1 className={HELP_TITLE}>Scene Options Panel</h1>
             {homePageLink()}
             <div className={HELP_BODY}>
-                <p> This panel is used to edit a scene. </p>
+                <p> This panel is used to edit the current scene. </p>
 
                 <h3> Selecting the Scene to Edit </h3>
                 <p>
@@ -491,7 +500,18 @@ function popupHelpPageContent(params:PopupHelpPageParams): ReactElement | null {
                     edit the sizes of traces, time warp the scene relative to
                     another scene, and replace animations in the scene.
                 </p>
-                <img src={SceneOptionsPanelScreenshot} alt={"picture of the fully expanded Scene Options panel"} />
+                <img src={SceneOptionsEditingScene} alt={"gif of editing the scene using the \"Scene Options\" panel"} />
+
+                <h3> The Scene Legend </h3>
+                <p>
+                    The "legend" of a scene allows you to both see what traces
+                    are currently shown in a scene and to delete said traces at will.
+                </p>
+                <p>
+                    You can open the current scene's legend by clicking and
+                    dragging the "Legend" button into the workspace.
+                </p>
+                <img src={SceneLegendAndDeletionOfTraces} alt={"gif of a scene's legend being created and then used to delete the traces in the scene"} />
             </div>
         </div>;
     } else if (params.page === PopupHelpPage.LoadAndSavePanel) {
@@ -499,12 +519,39 @@ function popupHelpPageContent(params:PopupHelpPageParams): ReactElement | null {
             <h1 className={HELP_TITLE}>Load and Save Panel</h1>
             {homePageLink()}
             <div className={HELP_BODY}>
+                <h3> Uploading and Downloading Workspaces </h3>
                 <p>
-                    This panel is used to load and save entire workspaces
+                    This panel is used to load and/or save entire workspaces
                     (including the current layout) as well as load objects and
                     animations into the currently-selected scene.
                 </p>
-                <img src={LoadAndSavePanelScreenshot} alt="Picture of the fully expanded Load and Save panel" />
+                <p>
+                    You can upload a workspace by either by using a raw
+                    URL to the json file or by uploading it from a local file.
+                    You can also download the current workspace by clicking the
+                    "Download" button.
+                </p>
+                <img src={LS_Workspace} alt="gif of loading and saving the workspace"/>
+
+                <p>
+                    If you would like to load a robot or object into the current
+                    scene, you can do so by either selecting an example robot in
+                    the robot dropdown and clicking "Confirm" or by uploading
+                    one from a URL. Uploaded robots and/or objects can be in
+                    either the ".glb" or ".urdf" format.
+                </p>
+                <img src={LooadingInExampleRobot} alt="gif of loading an example robot into the current scene"/>
+
+                <p>
+                    Once you have objects loaded into the current scene, you can
+                    add animations to them via the "Load motion data" section of
+                    the {goTo(PopupHelpPage.LoadAndSavePanel)} panel.
+                </p>
+                <p>
+                    Robot motions must be in a special CSV format to work. If you
+                    would like to learn more about motions and what the CSV
+                    format looks like, go {goTo(PopupHelpPage.AnimationCSV, "here")}.
+                </p>
             </div>
         </div>;
     } else if (params.page === PopupHelpPage.LegendPanel) {
@@ -578,7 +625,7 @@ function popupHelpPageContent(params:PopupHelpPageParams): ReactElement | null {
                     allows you to view any animation data that is animating the
                     robot.
                 </p>
-                <img src={RobotOptionsPanelScreenshot} alt="picture of the Robot Options panel" />
+                <img src={RobotOptionsRobotEditing} alt="gif of a robot being edited using the Robot Options panel" />
             </div>
         </div>;
     } else if (params.page === PopupHelpPage.QSceneOptionPanel) {
@@ -733,6 +780,161 @@ function popupHelpPageContent(params:PopupHelpPageParams): ReactElement | null {
                     <li> {goTo(PopupHelpPage.UmapGraphOptionPanel)} </li>
                     <li> {goTo(PopupHelpPage.UmapGraphPanel)} </li>
                 </ul>
+            </div>
+        </div>;
+    } else if (params.page === PopupHelpPage.AnimationCSV) {
+        return <div>
+            <h1 className={HELP_TITLE}>Animation CSV Format</h1>
+            {homePageLink()}
+            <div className={HELP_BODY}>
+                <p>
+                    This application compares "robot motions". A "robot motion"
+                    is simply an object moving over time. To make an object move
+                    over time, the application must know what
+                    positions/angles/etc. an object has over time. To give it
+                    this information, we give it an "animation" in the form of
+                    an "animation CSV".
+                </p>
+                <p>
+                    Each "animation CSV" starts off with a row of column names
+                    and then a number of rows of column values, each value
+                    meaning something different depending on what its column's
+                    name is. For example, one of the columns must always be the
+                    "time" column, which gives the time stamp of each row. Then
+                    the other columns can manipulate positions, rotations, or
+                    any other features of an object that can be animated and the
+                    application will make sure that they are set to their given
+                    values at the given time stamp. In this way, every row
+                    (besides the first row which consists of column names) acts
+                    as a "frame" of the animation.
+                </p>
+
+                <h3> Animation CSV Format </h3>
+                <p>
+                    Each CSV must start with 1 row of column names (strings) and
+                    then 1 or more rows of column values (floats or integers).
+                </p>
+                <p>
+                    Each column name selects one attribute of one object and
+                    manipulates it over time (each row is a "frame" of the
+                    animation).
+                </p>
+                <p>
+                    As such, there must be a "time" column that has the time in
+                    either seconds, milliseconds, microseconds, or nanoseconds.
+                    The unit is inferred based on the ending time in the CSV.
+                </p>
+
+                <table>
+                    <tr><td>seconds</td><td>by default</td></tr>
+                    <tr><td>milliseconds</td><td>if the total time is &gt; 1000</td></tr>
+                    <tr><td>microseconds</td><td>if the total time is &gt; 1000000</td></tr>
+                    <tr><td>nanoseconds</td><td>if the total time is &gt; 1000000000</td></tr>
+                </table>
+                <br></br>
+                <p>
+                    The time column must be increasing as you go down the CSV,
+                    but the first time stamp does not have to be at time 0 (it
+                    can be -1234.5, 12.3, etc.).
+                </p>
+
+                <p>
+                    The animation CSV also has special column names to select
+                    different attributes of an object and animate them over
+                    time:
+                </p>
+
+                <ul>
+                    <li> Position: "X_POS", "Y_POS", "Z_POS" </li>
+                    <ul>
+                        <li> Used to select and animate the (x, y, z) position of an object. </li>
+                        <li> Expected values are between -10.0 and 10.0 inclusive. </li>
+                    </ul>
+                </ul>
+
+                <ul>
+                    <li> Rotation: "X_ROT", "Y_ROT", "Z_ROT", "W_ROT" </li>
+                    <ul>
+                        <li> Used to select and affect the (x, y, z) euler rotation of an object. </li>
+                        <li> If "W_ROT" is present, then it actually animates the (x, y, z, w) quaternion rotation of an object. </li>
+                        <li> All values should be in radians. </li>
+                    </ul>
+                </ul>
+
+                <ul>
+                    <li> Scale: "X_SCALE", "Y_SCALE", "Z_SCALE" </li>
+                    <ul>
+                        <li> Used to select and affect the (x, y, z) scale of an object. </li>
+                        <li> Values can be anything you want but keep in mind that the expected viewing area is a 10 by 10 by 10 cube so making the scale larger than 10 is going to make it take up the entire screen. </li>
+                    </ul>
+                </ul>
+
+                <p>
+                    Other than the "time" column, every other column name should
+                    start with the name of the object it is selecting (found in
+                    the "[Select Object](SelectObjectTab)" tab.) and then (if
+                    the column is for one of the special attributes listed
+                    above) the attribute selector (listed above) should be
+                    appended to the column name.
+                </p>
+
+                <p>
+                    If anything other than an attribute selector is appended to
+                    the URDF name, it is assumed to be the name of the joint on
+                    the URDF that the column is selecting.
+                </p>
+
+                <p>
+                    Valid column names can be composed of any number of
+                    alphanumeric characters
+                    ("abcdefghigklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ0123456789")
+                    or underscores ("_").
+                </p>
+
+                <p>
+                    Additionally, you are allowed to use a hyphen "-" to
+                    seperate the object name from the
+                    position/rotation/scale/joint selector.
+                </p>
+
+                <h3> Example </h3>
+                <p>
+                    Below is an example animation CSV that you could put in a file and load directly into the application (there are explanations of its columns beneath it as well as a repeat of the CSV in a more readable format).
+                </p>
+
+                <table>
+                    <tr><th>time</th><th>ik_solutions-right_j0</th><th>ik_solutions-right_j1</th><th>ik_solutions-X_POS</th><th>ik_solutions-Y_POS</th><th>ik_solutions-Z_POS</th></tr>
+                    <tr><td>0.03330000000000003</td><td>1.1204203532251877</td><td>0.21976057475879832</td><td>-0.5517561517071136</td><td>1.5517561462</td><td>-2.1240893</td></tr>
+                    <tr><td>0.50381920383039</td><td>1.8204203732251877</td><td>0.21973057475879832</td><td>-0.35123049822136</td><td>1.5517561462</td><td>-2.1240893</td></tr>
+                    <tr><td>0.98992327397899</td><td>1.8204203732251877</td><td>0.21973057475879832</td><td>-0.35123049822136</td><td>1.5517561462</td><td>-2.1240893</td></tr>
+                    <tr><td>1.12309487213904</td><td>1.8204203732251877</td><td>0.21973057475879832</td><td>-0.35123049822136</td><td>1.5517561462</td><td>-2.1240893</td></tr>
+                    <tr><td>1.33091873829083</td><td>1.8204203732251877</td><td>0.21973057475879832</td><td>-0.35123049822136</td><td>1.5517561462</td><td>-2.1240893</td></tr>
+                    <tr><td>1.43091283743249</td><td>1.8204203732251877</td><td>0.21973057475879832</td><td>-0.35123049822136</td><td>1.5517561462</td><td>-2.1240893</td></tr>
+                </table>
+
+                <h4> Column Explanations: </h4>
+                <ul>
+                    <li>"time"</li>
+                    <ul><li>Tells the time stamp of each row.</li></ul>
+                    <li>"ik_solutions-right_j0"</li>
+                    <ul><li>Since this column's name does not possess any of the special column names, this column selects the "right_j0" joint of an object named "ik_solutions" and animates its angle.</li></ul>
+
+                    <li>ik_solutions-right_j1</li>
+                    <ul><li>Selects and animates the angle of a joint named "right_j1" on an object named "ik_solutions".</li></ul>
+
+                    <li>ik_solutions-X_POS</li>
+                    <ul><li>Animates the x-position of an object named "ik_solutions"</li></ul>
+
+                    <li>ik_solutions-Y_POS</li>
+                    <ul><li>Animates the y-position of an object named "ik_solutions"</li></ul>
+
+                    <li>ik_solutions-Z_POS</li>
+                    <ul><li>Animates the z-position of an object named "ik_solutions"</li></ul>
+                </ul>
+
+                <p>
+                    Below is the same CSV as above but in a more readable format.
+                </p>
             </div>
         </div>;
 

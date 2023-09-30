@@ -262,8 +262,7 @@ export class UmapGraphPanel extends Component<graph_panel_props, graph_panel_sta
     /**
      * fill graph data
      */
-    async fillGraphData(): Promise<void>
-    {
+    async fillGraphData(): Promise<void> {
         const { currRobots, color_map } = this.state;
         let line_names = [], line_ids = [], line_colors = [];
         let xVals = [];
@@ -277,7 +276,7 @@ export class UmapGraphPanel extends Component<graph_panel_props, graph_panel_sta
             let [filteredData, filteredTime] = this.filterJointData(jointData, times);
             filteredJointData = filteredJointData.concat(filteredData);
             filteredTimes.push(filteredTime);
-            assert (filteredData.length === filteredTime.length);
+            assert(filteredData.length === filteredTime.length);
             lengths.push(filteredData.length);
         }
         if (filteredJointData.length !== 0) {

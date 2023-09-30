@@ -4,7 +4,7 @@
     <h1>Motion Comparator</h1>
     <a href= "https://motion-comparator.github.io/MotionComparator"><img alt="status: online" src="https://img.shields.io/badge/status-online-success.svg?logoHeight=10"></a>
     <a href= "https://motion-comparator.github.io/MotionComparator"><img alt="demo: ready" src="https://img.shields.io/badge/demo-ready-success.svg?logoHeight=10"></a>
-    <a href= "TODO"><img alt="docs: ready" src="https://img.shields.io/badge/version-v0.80.0 Beta-blue.svg?logoHeight=10"></a>
+    <a href= "https://github.com/motion-comparator/MotionComparator/releases"><img alt="docs: ready" src="https://img.shields.io/badge/version-v0.80.0 Beta-blue.svg?logoHeight=10"></a>
   
 </div>
 
