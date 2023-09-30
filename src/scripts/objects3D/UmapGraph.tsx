@@ -27,6 +27,9 @@ export class UmapGraph {
     protected _lineWidth: number; // the stoke size of the curves displayed in the graph
     protected _backgroundColor: string; // the background color of the graph
     protected _axisColor: string; // the axis color of the graph
+    protected _nNeighbors: number; // the number of neighbors when calculating umap
+    protected _minDis: number; // the min distance when calculating umap
+    protected _spread: number; // the spread when calculating umap
 
     /**
      * 
@@ -65,6 +68,34 @@ export class UmapGraph {
 
         this._colorPalettes = [...palettes];
         UmapGraph.counter++;
+
+        this._nNeighbors = 30;
+        this._minDis = 0.1;
+        this._spread = 0.1;
+    }
+
+    nNeighbors(): number{
+        return this._nNeighbors;
+    }
+
+    setNNeighbors(nNeighbors: number) {
+        this._nNeighbors = nNeighbors;
+    }
+
+    minDis(): number{
+        return this._minDis;
+    }
+
+    setMinDis(minDis: number) {
+        this._minDis = minDis;
+    }
+
+    spread(): number{
+        return this._spread;
+    }
+
+    setSpread(spread: number) {
+        this._spread = spread;
     }
 
     backgroundColor(): string{

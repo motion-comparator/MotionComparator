@@ -70,6 +70,27 @@ export function gazeboToThreeCoords(rotation:T.Quaternion, position:T.Vector3): 
     return [q, pos];
 }
 
+let ESC_MAP: { [key: string]: string } = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+};
+
+/**
+ * Sanatizes text so that it is safe to put into the DOM.
+ * @param s The text to sanatize.
+ * @param forAttribute Whether the text is for an attribute.
+ * @returns The sanatized text.
+ */
+export function sanitizeText(s: string, forAttribute: boolean): string {
+    return s.replace(
+            forAttribute ? /[&<>'"]/g : /[&<>]/g,
+            function(c: string) { return ESC_MAP[c]; }
+    );
+}
+
 export function findLargestSmallerElement(array: number[], target: number): number {
     let left = 0;
     let right = array.length - 1;

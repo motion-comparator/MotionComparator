@@ -39,6 +39,9 @@ interface graph_panel_state {
     panelHeight: number, // height of panel captured by resize observer
     need_update: boolean // need to update graph data to trigger fillGraphData
     graph_update: boolean // need to update graph->sent to LineGraph components when lines are added or removed, so axis and lines need regeneration
+    nNeighbors: number; // the number of neighbors when calculating umap
+    minDis: number; // the min distance when calculating umap
+    spread: number; // the spread when calculating umap
 }
 
 export interface time_obj{
@@ -82,6 +85,9 @@ export class UmapGraphPanel extends Component<graph_panel_props, graph_panel_sta
             panelWidth: 300,
             need_update: true,
             graph_update: false,
+            nNeighbors: this.props.graph.nNeighbors(),
+            minDis: this.props.graph.minDis(),
+            spread: this.props.graph.spread(),
         };
         this._graphDiv = createRef();
         this.times = [];
@@ -154,16 +160,23 @@ export class UmapGraphPanel extends Component<graph_panel_props, graph_panel_sta
         return [times, result];
     }
 
-    convertJointDataToUmap(jointData: number[][]): number[][]
+    async convertJointDataToUmap(jointData: number[][]): Promise<number[][]>
     {
-        const umap = new UMAP({nNeighbors: 30, minDist: 0.1, spread: 0.1});
+        APP.setPopupHelpPage({ page: PopupHelpPage.LoadingStarted, type: "UMAP" });
+        //await Promise.all([]);
+        const {graph} = this.props;
+        const umap = new UMAP({nNeighbors: graph.nNeighbors(), minDist: graph.minDis(), spread: graph.spread()});
 
         // for (let i = 0; i < 1000; i++) {
         //     let a = Array(jointData[0].length).fill(Math.random() * Math.PI * 2 - Math.PI);
         //     jointData.push(a);
         // }
         
-        const embedding = umap.fit(jointData);
+        //const embedding = umap.fit(jointData);
+        const embedding = await umap.fitAsync(jointData, epochNumber => {
+            // check progress and give user feedback, or return `false` to stop
+          });
+        APP.setPopupHelpPage({ page: PopupHelpPage.LoadingSuccess, type: "UMAP"});
         return embedding;
     }
    
@@ -249,13 +262,13 @@ export class UmapGraphPanel extends Component<graph_panel_props, graph_panel_sta
     /**
      * fill graph data
      */
-    fillGraphData()
+    async fillGraphData(): Promise<void>
     {
         const { currRobots, color_map } = this.state;
         let line_names = [], line_ids = [], line_colors = [];
-        this.xVals = [];
-        this.yVals = [];
-        this.times = [];
+        let xVals = [];
+        let yVals = [];
+        let _times = [];
         let filteredJointData: number[][] = [];
         let filteredTimes: number[][] = [];
         let lengths: number[] = [];
@@ -268,7 +281,9 @@ export class UmapGraphPanel extends Component<graph_panel_props, graph_panel_sta
             lengths.push(filteredData.length);
         }
         if (filteredJointData.length !== 0) {
-            let umapData = this.convertJointDataToUmap(filteredJointData);
+            //APP.setPopupHelpPage({ page: PopupHelpPage.LoadingStarted, type: "umap" });
+            let umapData = await this.convertJointDataToUmap(filteredJointData);
+            //APP.setPopupHelpPage({ page: PopupHelpPage.LoadingSuccess, type: "umap"});
             let index: number = 0;
             let robotIndex: number = 0;
             for (const [eventName, [times, jointData]] of currRobots) {
@@ -293,15 +308,17 @@ export class UmapGraphPanel extends Component<graph_panel_props, graph_panel_sta
                     t.push(times[i]);
                 }
 
-                this.xVals.push(x);
-                this.yVals.push(y);
-                this.times.push(times);
+                xVals.push(x);
+                yVals.push(y);
+                _times.push(times);
 
                 index = index + lengths[robotIndex];
                 robotIndex++;
             }
         }
-
+        this.xVals = xVals;
+        this.yVals = yVals;
+        this.times = _times;
         this.props.graph.setLineNames(line_names);
         this.props.graph.setLineIds(line_ids);
         this.props.graph.setLineColors(line_colors);
@@ -359,6 +376,19 @@ export class UmapGraphPanel extends Component<graph_panel_props, graph_panel_sta
                 this.props.graph.setDeleteLine(undefined, undefined);
             }
         }
+
+        if(this.props.graph.nNeighbors() !== this.state.nNeighbors 
+        || this.props.graph.minDis() !== this.state.minDis 
+        || this.props.graph.spread() !== this.state.spread){
+            this.setState({
+                nNeighbors: this.props.graph.nNeighbors(),
+                minDis: this.props.graph.minDis(),
+                spread: this.props.graph.spread(),
+            });
+            this.props.graph.resetColor();
+            this.fillGraphData();
+        }
+
         const {prev_times, need_update} = this.state;
         const timeBoundChange = (prev_times.start !== this.props.robotSceneManager.currStartTime() || 
             prev_times.end !== this.props.robotSceneManager.currEndTime());

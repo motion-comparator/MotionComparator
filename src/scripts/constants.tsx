@@ -65,6 +65,8 @@ class AppProxy {
     setPopupHelpPage(page: PopupHelpPage | PopupHelpPageParams) {
         if (this._app) {
             this._app.setPopupHelpPage(page);
+        } else {
+            console.error(`Could not set the current popup page to "${page}" because \`AppProxy._app\` is undefined.`);
         }
     }
 

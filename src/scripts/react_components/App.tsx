@@ -209,7 +209,7 @@ export default class App extends Component<app_props, app_state> {
     }
 
     componentDidMount() {
-        //assert(APP.app() === undefined, "APP.app() was not undefined! Only 1 APP may be runnig at a time.")
+        //assert(APP.app() === undefined, "APP.app() was not undefined! Only 1 APP may be running at a time.")
         APP.setApp(this); // Only 1 App object can be mounted at a time so this should be fine
 
         if (this.state.jsonURL) {

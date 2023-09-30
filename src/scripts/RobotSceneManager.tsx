@@ -1043,17 +1043,17 @@ export class RobotSceneManager {
      * @param url The url to fetch the sessions from.
      */
     async loadSessionFromURL(url:string, onRestoreLayout?: (savedLayout: LayoutBase | undefined) => void):Promise<void> {
-        APP.setPopupHelpPage({ page: PopupHelpPage.LoadingStarted, location: url });
+        APP.setPopupHelpPage({ page: PopupHelpPage.LoadingStarted, location: url, type: "workspace" });
 
         try {
             // fetch the data
             let res = await fetch(url, { method: "GET", });
             // load the data
             await this.loadSession(await res.json(), onRestoreLayout)
-            APP.setPopupHelpPage({ page: PopupHelpPage.LoadingSuccess, location: url })
+            APP.setPopupHelpPage({ page: PopupHelpPage.LoadingSuccess, location: url, type: "workspace" })
         } catch(e) {
             // failed to load
-            APP.setPopupHelpPage({ page: PopupHelpPage.LoadingFailed, location: url });
+            APP.setPopupHelpPage({ page: PopupHelpPage.LoadingFailed, location: url, type: "workspace" });
             throw e;
         }
     }
@@ -1420,15 +1420,15 @@ export class RobotSceneManager {
      * @returns A promise that resolves when the json was successfully loaded.
      */
     async loadSessionFromLocalFile(file:File, onRestoreLayout?: (savedLayout: LayoutBase | undefined) => void):Promise<void> {
-        APP.setPopupHelpPage({ page: PopupHelpPage.LoadingStarted, location: file.name });
+        APP.setPopupHelpPage({ page: PopupHelpPage.LoadingStarted, location: file.name, type: "workspace" });
         try {
             // fetch the json data
             let json = (await loadJsonFromLocalFile(file)) as sessions_import_format;
             // load the json data
-            this.loadSession(json, onRestoreLayout);
+            await this.loadSession(json, onRestoreLayout);
             APP.setPopupHelpPage({ page: PopupHelpPage.LoadingSuccess, location: file.name })
         } catch(e) {
-            APP.setPopupHelpPage({ page: PopupHelpPage.LoadingFailed, location: file.name })
+            APP.setPopupHelpPage({ page: PopupHelpPage.LoadingFailed, location: file.name, type: "workspace" })
             throw e;
         }
     }
@@ -1919,8 +1919,7 @@ export class RobotSceneManager {
      * @param sceneIdMap 
      * @returns 
      */
-    restoreWindows(layout: LayoutBase | undefined, sceneIdMap: Map<string, string>, qSceneIdMap: Map<string, string>, graphIdMap: Map<string, string>, umapGraphIdMap: Map<string, string>)
-    {
+    restoreWindows(layout: LayoutBase | undefined, sceneIdMap: Map<string, string>, qSceneIdMap: Map<string, string>, graphIdMap: Map<string, string>, umapGraphIdMap: Map<string, string>) {
         if(layout === undefined) return;
         let robotSceneIdParts = (id: string): [string, string, string] => {
             let i = id.indexOf('&');

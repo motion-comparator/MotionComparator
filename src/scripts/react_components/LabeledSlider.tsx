@@ -26,6 +26,7 @@ export interface labeled_slider_props {
     max?:number,
     value?:number,
     onChange?: (newValue:number) => void,
+    onMouseUp?: (newValue: number) => void, // a function that is called when the user releases the mouse
 }
 
 interface labeled_slider_state { 
@@ -159,7 +160,7 @@ export class LabeledSlider extends Component<labeled_slider_props, labeled_slide
         } else {
             label = undefined;
         }
-
+        let onMouseUp = this.props.onMouseUp;
         return (
             <div className = "LabeledSlider">
                 {label}
@@ -176,6 +177,7 @@ export class LabeledSlider extends Component<labeled_slider_props, labeled_slide
                            step={this.step()}
                            value={this.state.sliderValue}
                            onChange={this.onSliderChange}
+                           onMouseUp={() => {if(onMouseUp) onMouseUp(Number(this.state.sliderValue))}}
                            ref={this._sliderInput}
                     />
                 </div>

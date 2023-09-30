@@ -67,6 +67,18 @@ export class UmapGraphOptionPanel extends Component<graph_panel_props, graph_pan
       this.props.robotSceneManager.getCurrUmapGraph()?.setLineWidth(e);
     }
 
+    onChangeNNeighbors(e:number){
+      this.props.robotSceneManager.getCurrUmapGraph()?.setNNeighbors(e);
+    }
+
+    onChangeMinDis(e:number){
+      this.props.robotSceneManager.getCurrUmapGraph()?.setMinDis(e);
+    }
+
+    onChangeSpread(e:number){
+      this.props.robotSceneManager.getCurrUmapGraph()?.setSpread(e);
+    }
+
     onBackgroundColorChange(newValue: string) {
       this.props.robotSceneManager.getCurrUmapGraph()?.setBackgroundColor(newValue);
       this.props.forceUpdateTabNames(); // trigger the graph update instantaneously
@@ -162,6 +174,32 @@ export class UmapGraphOptionPanel extends Component<graph_panel_props, graph_pan
                 step={0.1}
                 value={currSelectedGraph?.lineWidth()}
                 onChange={this.onChangeLineWidth.bind(this)}
+              />
+              <LabeledSlider
+                label={"number of neighbors: "}
+                min={1}
+                max={100}
+                step={1}
+                value={currSelectedGraph?.nNeighbors()}
+                //onChange={this.onChangeNNeighbors.bind(this)}
+                onMouseUp={this.props.robotSceneManager.getCurrUmapGraph()?.setNNeighbors.bind(this.props.robotSceneManager.getCurrUmapGraph())}
+              />
+              <LabeledSlider
+                label={"min distance: "}
+                min={0.1}
+                max={10}
+                step={0.1}
+                value={currSelectedGraph?.minDis()}
+                //onChange={this.onChangeMinDis.bind(this)}
+                onMouseUp={this.props.robotSceneManager.getCurrUmapGraph()?.setMinDis.bind(this.props.robotSceneManager.getCurrUmapGraph())}
+              />
+              <LabeledSlider
+                label={"spread: "}
+                min={0.1}
+                max={1}
+                step={0.01}
+                value={currSelectedGraph?.spread()}
+                onMouseUp={this.props.robotSceneManager.getCurrUmapGraph()?.setSpread.bind(this.props.robotSceneManager.getCurrUmapGraph())}
               />
               <Accordion allowZeroExpanded allowMultipleExpanded>
                 <AccordionItem>

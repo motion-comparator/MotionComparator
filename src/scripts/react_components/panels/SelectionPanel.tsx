@@ -20,6 +20,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestion } from '@fortawesome/free-solid-svg-icons';
 import { APP } from "../../constants";
 import { PopupHelpPage } from "../popup_help_page";
+import { Id } from "../../Id";
 
 export interface selection_panel_props {
     getParentDockLayout: () => DockLayout | undefined,
@@ -149,6 +150,7 @@ export class SelectionPanel extends Component<
       result.push({
         value: "Articulated Joints",
         label: "Articulated Joints",
+        id: "Articulated Joints",
         inScene: false,
         inGraph: false,
       });
@@ -156,6 +158,7 @@ export class SelectionPanel extends Component<
       result.push({
         value: `${name}&${jointName}`,
         label: jointName,
+        id: joint.id().value(),
         inScene: joint.isInScene(),
         inGraph: joint.isInGraph(),
       });
@@ -165,6 +168,7 @@ export class SelectionPanel extends Component<
       result.push({
         value: "Fixed Joints",
         label: "Fixed Joints",
+        id: "Fixed Joints",
         inScene: false,
         inGraph: false,
       });
@@ -172,6 +176,7 @@ export class SelectionPanel extends Component<
       result.push({
         value: `${name}&${jointName}`,
         label: jointName,
+        id: joint.id().value(),
         inScene: joint.isInScene(),
         inGraph: joint.isInGraph(),
       });
@@ -181,6 +186,7 @@ export class SelectionPanel extends Component<
       result.push({
         value: "Links",
         label: "Links",
+        id: "Links",
         inScene: false,
         inGraph: false,
       });
@@ -188,6 +194,7 @@ export class SelectionPanel extends Component<
       result.push({
         value: `${name}&${jointName}`,
         label: jointName,
+        id: joint.id().value(),
         inScene: joint.isInScene(),
         inGraph: joint.isInGraph(),
       });
@@ -204,12 +211,14 @@ export class SelectionPanel extends Component<
     result.push({
       value: "Robot",
       label: "Robot",
+      id: "Robot",
       inScene: false,
       inGraph: false,
     });
     result.push({
       value: `${name}&${name}`,
       label: `${name}`,
+      id: robot.id().value(),
       inScene: robot.isInScene(),
       inGraph: robot.isInGraph(),
     });
@@ -239,7 +248,7 @@ export class SelectionPanel extends Component<
     else {
       return this.genRobotPartOptions(scene, robotName)?.map((robotPart) => (
         <AccordionItemPanel
-          
+          key={robotPart.id}
           // id={scene.id().value() + "#" + robotPart.value}
         >
           {this.genRobotPartList(scene, robotPart)}
